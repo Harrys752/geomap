@@ -1,19 +1,18 @@
-// data.js - Previous version restored (17 sites, 4 categories: Vulkanik/Tektonik/Sedimen/Metamorf)
-// Dynamic filters will show 4, diverse enough w/ emojis.
-
+// data.js - Versi Final Anti-Error (17 Sites)
 const lokasiGeologi = [
     // VULKANIK (6)
     {
         nama: "Gunung Ciremai",
         koordinat: [-6.892, 108.406],
         kategori: "Vulkanik",
+        wilayah: "jawa",
         emoji: "🌋",
         info: {
             batuan: "Andesit, Dasit, Piroklastik",
             umur: "Holosen (<11.700 thn)",
             skalaWaktu: "Kenozoikum - Kuarter",
             bencana: "Lahar, Piroklastik, Gas",
-            lempeng: "Subduksi Indo-Australia (Busur Sunda)"
+            lempeng: "Subduksi Indo-Australia"
         },
         deskripsi: "Stratovulkan ganda teraktif di Jawa Barat. Magma andesitik dari subduksi lempeng."
     },
@@ -21,6 +20,7 @@ const lokasiGeologi = [
         nama: "Gunung Merapi",
         koordinat: [-7.537, 110.446],
         kategori: "Vulkanik",
+        wilayah: "jawa",
         emoji: "🌋",
         info: {
             batuan: "Andesit, Basalt, Lava",
@@ -35,6 +35,7 @@ const lokasiGeologi = [
         nama: "Gunung Krakatau",
         koordinat: [-6.102, 105.423],
         kategori: "Vulkanik",
+        wilayah: "sumatera",
         emoji: "💥",
         info: {
             batuan: "Andesit, Obsidian",
@@ -49,6 +50,7 @@ const lokasiGeologi = [
         nama: "Gunung Bromo",
         koordinat: [-7.942, 112.953],
         kategori: "Vulkanik",
+        wilayah: "jawa",
         emoji: "🌋",
         info: {
             batuan: "Basalt, Trachyt",
@@ -63,6 +65,7 @@ const lokasiGeologi = [
         nama: "Gunung Rinjani",
         koordinat: [-8.415, 116.457],
         kategori: "Vulkanik",
+        wilayah: "nusa_tenggara",
         emoji: "⛰️",
         info: {
             batuan: "Andesit, Basalt",
@@ -77,6 +80,7 @@ const lokasiGeologi = [
         nama: "Gunung Agung",
         koordinat: [-8.342, 115.508],
         kategori: "Vulkanik",
+        wilayah: "bali",
         emoji: "🌋",
         info: {
             batuan: "Andesit",
@@ -88,11 +92,12 @@ const lokasiGeologi = [
         deskripsi: "Gunung suci Bali. Letusan 1963 global impact."
     },
 
-    // TEKTONIK (5)
+    // TEKTONIK (6)
     {
         nama: "Sesar Lembang",
         koordinat: [-6.825, 107.615],
         kategori: "Tektonik",
+        wilayah: "jawa",
         emoji: "📉",
         info: {
             batuan: "Breksi, Endapan Danau",
@@ -107,6 +112,7 @@ const lokasiGeologi = [
         nama: "Sesar Palu-Koro",
         koordinat: [-0.907, 119.850],
         kategori: "Tektonik",
+        wilayah: "sulawesi",
         emoji: "💥",
         info: {
             batuan: "Batuan Metamorf",
@@ -119,8 +125,9 @@ const lokasiGeologi = [
     },
     {
         nama: "Sesar Sumatera",
-        koordinat: [0.000, 99.500],
+        koordinat: [-0.000, 99.500],
         kategori: "Tektonik",
+        wilayah: "sumatera",
         emoji: "📉",
         info: {
             batuan: "Granite, Metamorf",
@@ -135,6 +142,7 @@ const lokasiGeologi = [
         nama: "Pegunungan Jayawijaya",
         koordinat: [-4.000, 137.000],
         kategori: "Tektonik",
+        wilayah: "papua",
         emoji: "⛰️",
         info: {
             batuan: "Metamorf, Ultramafik",
@@ -149,6 +157,7 @@ const lokasiGeologi = [
         nama: "Zona Subduksi Selatan Jawa",
         koordinat: [-9.000, 110.000],
         kategori: "Tektonik",
+        wilayah: "jawa",
         emoji: "🌊",
         info: {
             batuan: "Ophiolit, Blueschist",
@@ -159,12 +168,28 @@ const lokasiGeologi = [
         },
         deskripsi: "Trench terdalam. Sumber gempa besar + tsunami."
     },
+    {
+        nama: "Sesar Cimandiri",
+        koordinat: [-6.9889, 106.5510],
+        kategori: "Tektonik",
+        wilayah: "jawa",
+        emoji: "📉",
+        info: {
+            batuan: "Breksi, Formasi Jampang",
+            umur: "Miosen - Kuarter",
+            skalaWaktu: "Kenozoikum",
+            bencana: "Gempa Bumi Terestrial",
+            lempeng: "Sesar Aktif Intra-Busur"
+        },
+        deskripsi: "Sesar aktif yang memanjang dari Teluk Pelabuhan Ratu hingga ke arah timur laut."
+    },
 
-    // SEDIMEN (4)
+    // SEDIMEN (3)
     {
         nama: "Cekungan Jatibarang",
         koordinat: [-6.474, 108.312],
         kategori: "Sedimen",
+        wilayah: "jawa",
         emoji: "🏔️",
         info: {
             batuan: "Batupasir, Batulempung, Tuff",
@@ -176,23 +201,10 @@ const lokasiGeologi = [
         deskripsi: "Reservoir migas utama. Endapan turbidit."
     },
     {
-        nama: "Dataran Aluvial Jawa Tengah",
-        koordinat: [-7.000, 110.000],
-        kategori: "Sedimen",
-        emoji: "🌾",
-        info: {
-            batuan: "Aluvial, Lempung",
-            umur: "Holosen",
-            skalaWaktu: "Kuarter",
-            bencana: "Banjir, subsidence",
-            lempeng: "Endapan sungai"
-        },
-        deskripsi: "Sawah subur dari sedimentasi Bengawan Solo."
-    },
-    {
         nama: "Cekungan Kutai",
         koordinat: [0.000, 117.000],
         kategori: "Sedimen",
+        wilayah: "kalimantan",
         emoji: "🛢️",
         info: {
             batuan: "Batupasir, Shale",
@@ -207,6 +219,7 @@ const lokasiGeologi = [
         nama: "Formasi Tonasa",
         koordinat: [-4.000, 119.500],
         kategori: "Sedimen",
+        wilayah: "sulawesi",
         emoji: "🏝️",
         info: {
             batuan: "Batugamping, Reefal",
@@ -223,6 +236,7 @@ const lokasiGeologi = [
         nama: "Kompleks Metamorf Toraja",
         koordinat: [-2.9, 119.9],
         kategori: "Metamorf",
+        wilayah: "sulawesi",
         emoji: "🔮",
         info: {
             batuan: "Mika Skis, Gneis, Amphibolit",
@@ -237,7 +251,8 @@ const lokasiGeologi = [
         nama: "Batuan Metamorf Papua Tengah",
         koordinat: [-3.5, 135.5],
         kategori: "Metamorf",
-        emoji: "🪨",
+        wilayah: "papua",
+        emoji: "💎", // Diganti dari batu ke kristal biar kebaca
         info: {
             batuan: "Skis, Fillit, Marmer",
             umur: "Mesozoikum - Tersier",
@@ -248,4 +263,3 @@ const lokasiGeologi = [
         deskripsi: "Metamorf dari kolisi lempeng di Pegunungan Lengguru."
     }
 ];
-

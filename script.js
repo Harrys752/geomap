@@ -1,7 +1,8 @@
-// GeoMap V1.1 - Ariss Edition (Final Fix)
-document.addEventListener('DOMContentLoaded', function() {
-    // 1. Inisialisasi Peta
+// GeoMap V1.1 - Ariss Edition (Final Optimized)
+document.addEventListener('DOMContentLoaded', function () {
+    // 1. Inisialisasi Peta - Fokus awal Indonesia
     const map = L.map('map').setView([-2.5489, 118.0149], 5);
+
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap | GeoMap Indonesia'
     }).addTo(map);
@@ -9,72 +10,89 @@ document.addEventListener('DOMContentLoaded', function() {
     // Variabel Global
     let layers = {};
     let allMarkers = [];
+
+    // Dataset lokasi untuk mempermudah pencarian regional (Bisa ditambah sesuai kebutuhan)
     const knownPlaces = {
-        'bandung': [-6.9175, 107.6191], 'jakarta': [-6.2088, 106.8456],
-        'yogyakarta': [-7.7956, 110.3695], 'jogja': [-7.7956, 110.3695],
-        'surabaya': [-7.2575, 112.7521], 'medan': [3.5952, 98.6728],
-        'palu': [-0.907, 119.85], 'jawa': [-7.0, 110.0]
+        'bandung': [-6.9175, 107.6191],
+        'jakarta': [-6.2088, 106.8456],
+        'yogyakarta': [-7.7956, 110.3695],
+        'jogja': [-7.7956, 110.3695],
+        'surabaya': [-7.2575, 112.7521],
+        'medan': [3.5952, 98.6728],
+        'palu': [-0.907, 119.85],
+        'jawa': [-7.0, 110.0],
+        'sumatera': [-0.5897, 101.3431],
+        'kalimantan': [-0.0001, 113.9213],
+        'sulawesi': [-1.4300, 121.4456],
+        'papua': [-4.2699, 138.0803]
     };
 
-    // 2. Fungsi Jarak (Haversine)
+    // 2. Fungsi Hitung Jarak (Haversine Formula)
     function haversineDistance(coords1, coords2) {
-        const R = 6371; 
+        const R = 6371;
         const dLat = (coords2[0] - coords1[0]) * Math.PI / 180;
         const dLon = (coords2[1] - coords1[1]) * Math.PI / 180;
-        const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-                  Math.cos(coords1[0] * Math.PI / 180) * Math.cos(coords2[0] * Math.PI / 180) *
-                  Math.sin(dLon/2) * Math.sin(dLon/2);
-        return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(coords1[0] * Math.PI / 180) * Math.cos(coords2[0] * Math.PI / 180) *
+            Math.sin(dLon / 2) * Math.sin(dLon / 2);
+        return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     }
 
-    // 3. Update Sidebar UI
+    // 3. Update Sidebar UI - Menampilkan Detail Geologi
     function updateSidebar(loc) {
         const panel = document.getElementById('info-panel');
         if (!panel) return;
 
+        // Efek transisi sederhana dengan template literal
         panel.innerHTML = `
-            <div style="animation: fadeIn 0.5s ease;">
-                <h3 style="color:#f1c40f">${loc.emoji} ${loc.nama}</h3>
-                <hr style="border: 0.5px solid #555">
-                <p><strong>💎 Batuan:</strong> ${loc.info.batuan}</p>
-                <p><strong>⏳ Umur:</strong> ${loc.info.umur}</p>
-                <p><strong>🌍 Lempeng:</strong> ${loc.info.lempeng}</p>
-                <div style="background:rgba(255,255,255,0.1); padding:15px; border-radius:8px; margin:15px 0; font-size:0.9rem; line-height:1.5">
+            <div style="animation: fadeIn 0.4s ease-out; color: white;">
+                <h2 style="color:#f1c40f; margin-bottom:10px;">${loc.emoji} ${loc.nama}</h2>
+                <span style="background:#e67e22; padding:2px 8px; border-radius:4px; font-size:0.8rem; text-transform:uppercase;">
+                    ${loc.kategori}
+                </span>
+                <hr style="border: 0.5px solid #444; margin: 15px 0;">
+                
+                <div style="display: grid; gap: 8px; font-size: 0.9rem;">
+                    <p><strong>💎 Jenis Batuan:</strong> ${loc.info.batuan}</p>
+                    <p><strong>⏳ Umur Geologi:</strong> ${loc.info.umur}</p>
+                    <p><strong>🌍 Setting Tektonik:</strong> ${loc.info.lempeng}</p>
+                </div>
+
+                <div style="background:rgba(255,255,255,0.05); padding:15px; border-radius:8px; margin:15px 0; font-size:0.9rem; line-height:1.6; border-left: 4px solid #f1c40f;">
                     ${loc.deskripsi}
                 </div>
+
                 <button onclick="window.open('https://www.google.com/search?q=Geologi+${loc.nama}', '_blank')" 
-                        style="width:100%; padding:10px; cursor:pointer; background:#f1c40f; border:none; border-radius:5px; font-weight:bold">
-                        Pelajari Lebih Lanjut
+                        style="width:100%; padding:12px; cursor:pointer; background:#f1c40f; border:none; border-radius:5px; font-weight:bold; transition: 0.3s;">
+                    Explorasi Literatur
                 </button>
             </div>
         `;
     }
 
-    // 4. Generate Filter Switch
+    // 4. Generate Filter Checkbox secara Dinamis
     function generateFilters(categories) {
         const container = document.getElementById('dynamic-filters');
         if (!container) return;
 
-        container.innerHTML = ''; 
+        container.innerHTML = '';
         categories.forEach(cat => {
             const item = document.createElement('div');
             item.className = 'filter-item';
-            item.style.display = 'flex';
-            item.style.alignItems = 'center';
-            item.style.marginBottom = '10px';
-            
+            item.style.cssText = 'display:flex; align-items:center; margin-bottom:12px;';
+
             item.innerHTML = `
                 <label class="switch">
                     <input type="checkbox" id="check-${cat}" data-cat="${cat}" checked>
                     <span class="slider"></span>
                 </label>
-                <span style="margin-left:10px; color:white; text-transform: capitalize;">${cat}</span>
+                <span style="margin-left:12px; color:white; font-size:0.9rem; text-transform: capitalize;">${cat}</span>
             `;
             container.appendChild(item);
 
             const cb = document.getElementById(`check-${cat}`);
             if (cb) {
-                cb.addEventListener('change', function() {
+                cb.addEventListener('change', function () {
                     if (this.checked) { map.addLayer(layers[cat]); }
                     else { map.removeLayer(layers[cat]); }
                 });
@@ -82,85 +100,117 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // 5. Inisialisasi Aplikasi
+    // 5. Inisialisasi Aplikasi (Logika Auto-Identify Wilayah)
     function initApp() {
-        if (typeof lokasiGeologi === 'undefined') {
-            console.error("Data lokasiGeologi tidak ditemukan!");
-            return;
-        }
-
+        if (typeof lokasiGeologi === 'undefined') return;
         const categories = [...new Set(lokasiGeologi.map(loc => loc.kategori.toLowerCase()))];
-        
-        categories.forEach(cat => {
-            layers[cat] = L.layerGroup().addTo(map);
-        });
+        categories.forEach(cat => { layers[cat] = L.layerGroup().addTo(map); });
 
         lokasiGeologi.forEach(loc => {
             const geoIcon = L.divIcon({
                 html: `<div style="font-size: 28px;">${loc.emoji}</div>`,
                 className: 'custom-div-icon',
-                iconSize: [36, 36],
-                iconAnchor: [18, 36]
+                iconSize: [36, 36], iconAnchor: [18, 36]
             });
-
             const marker = L.marker(loc.koordinat, { icon: geoIcon });
+
+            // --- LOGIKA PENENTU WILAYAH (Biar nggak usah ketik manual di data.js) ---
+            let detectedRegion = "";
+            const [lat, lng] = loc.koordinat;
+            const desc = loc.deskripsi.toLowerCase();
+            const nama = loc.nama.toLowerCase();
+
+            // Cek lewat teks dulu (paling akurat)
+            if (desc.includes('kalimantan') || nama.includes('kalimantan')) detectedRegion = "kalimantan";
+            else if (desc.includes('sulawesi') || nama.includes('sulawesi')) detectedRegion = "sulawesi";
+            else if (desc.includes('sumatera') || nama.includes('sumatera')) detectedRegion = "sumatera";
+            else if (desc.includes('jawa') || nama.includes('jawa')) detectedRegion = "jawa";
+            else if (desc.includes('papua') || nama.includes('papua')) detectedRegion = "papua";
+            // Jika teks nggak ada, pakai koordinat (Fallback)
+            else {
+                if (lng >= 108 && lng < 120 && lat >= -5) detectedRegion = "kalimantan";
+                else if (lng >= 119 && lng < 127) detectedRegion = "sulawesi";
+                else if (lng >= 109 && lng < 116 && lat < -5) detectedRegion = "jawa";
+            }
+
             marker.on('click', () => {
-                map.flyTo(loc.koordinat, 12, { duration: 1.5 });
+                map.flyTo(loc.koordinat, 12);
                 updateSidebar(loc);
             });
 
-            const catLower = loc.kategori.toLowerCase();
-            layers[catLower].addLayer(marker);
-            allMarkers.push({ marker, loc, category: catLower });
-        });
+            layers[loc.kategori.toLowerCase()].addLayer(marker);
 
+            allMarkers.push({
+                marker: marker,
+                loc: loc,
+                regionTag: detectedRegion
+            });
+        });
         generateFilters(categories);
     }
 
-    // 6. Search System
+    // 6. Search System (Flexible Matching - Ariss Edition)
     const searchInput = document.getElementById('searchInput');
     if (searchInput) {
-        const SEARCH_RADIUS_KM = 450; 
-
         searchInput.addEventListener('input', (e) => {
             const query = e.target.value.toLowerCase().trim();
-            let geoCenter = null;
 
-            for (const [place, coords] of Object.entries(knownPlaces)) {
-                if (place.includes(query) || query.includes(place)) { 
-                    geoCenter = coords; 
-                    break; 
-                }
+            // 1. Reset jika kosong
+            if (query === "") {
+                allMarkers.forEach(m => {
+                    m.marker.setOpacity(1);
+                    if (m.marker.getElement()) m.marker.getElement().style.display = 'block';
+                });
+                map.setView([-2.5489, 118.0149], 5);
+                return;
             }
 
-            allMarkers.forEach(({ marker, loc }) => {
-                const isTextMatch = loc.nama.toLowerCase().includes(query) || 
-                                    loc.deskripsi.toLowerCase().includes(query);
-                
-                let isGeoMatch = false;
-                if (geoCenter) {
-                    const dist = haversineDistance(loc.koordinat, geoCenter);
-                    isGeoMatch = dist < SEARCH_RADIUS_KM;
+            // 2. Deteksi Target Pulau
+            const islands = ['kalimantan', 'jawa', 'sumatera', 'sulawesi', 'papua', 'bali'];
+            let targetIsland = islands.find(isl => isl.includes(query) || query.includes(isl));
+
+            // 3. Filter Marker
+            allMarkers.forEach(m => {
+                const nama = m.loc.nama.toLowerCase();
+                const desc = m.loc.deskripsi.toLowerCase();
+                const [lat, lng] = m.loc.koordinat; // Ambil koordinat marker
+
+                const isTextMatch = nama.includes(query) || desc.includes(query);
+
+                let isInsideIsland = false;
+
+                if (targetIsland === 'kalimantan') {
+                    // Batas Kalimantan: Bujur 108 sampai 119
+                    isInsideIsland = (lng >= 108 && lng <= 119 && lat >= -4.5 && lat <= 7);
+                }
+                else if (targetIsland === 'jawa') {
+                    // Batas Jawa: 
+                    // Bujur: 105.1 (Ujung Kulon) sampai 114.6 (Banyuwangi)
+                    // Lintang: Harus di bawah -5.8 (biar nggak narik Kalimantan/Sumatera)
+                    isInsideIsland = (lng >= 105.1 && lng <= 114.6 && lat <= -5.8 && lat >= -8.8);
+                }
+                else if (targetIsland === 'bali') {
+                    // Batas Bali (biar nggak nebeng ke Jawa atau Lombok)
+                    isInsideIsland = (lng > 114.6 && lng <= 115.5 && lat <= -8);
                 }
 
-                if (query === "" || isTextMatch || isGeoMatch) {
-                    marker.setOpacity(1);
-                    if (marker.getElement()) marker.getElement().style.display = 'block';
+                // Eksekusi Tampil/Sembunyi
+                if (isTextMatch || isInsideIsland) {
+                    m.marker.setOpacity(1);
+                    if (m.marker.getElement()) m.marker.getElement().style.display = 'block';
                 } else {
-                    marker.setOpacity(0);
-                    if (marker.getElement()) marker.getElement().style.display = 'none';
+                    m.marker.setOpacity(0);
+                    if (m.marker.getElement()) m.marker.getElement().style.display = 'none';
                 }
             });
 
-            if (geoCenter && query.length > 2) {
-                const zoomLevel = query.length < 5 ? 6 : 8; 
-                map.flyTo(geoCenter, zoomLevel, { duration: 1 });
-            } else if (query === "") {
-                map.setView([-2.5489, 118.0149], 5);
+            // 4. Zoom ke pulau
+            if (targetIsland && knownPlaces[targetIsland]) {
+                map.flyTo(knownPlaces[targetIsland], 6, { duration: 1.5 });
             }
         });
     }
 
-    // Jalankan Aplikasi
+    // Jalankan aplikasi
     initApp();
 });
