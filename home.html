@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GeoMap Indonesia | Digital Geoscience Tool</title>
+    <!-- Leaflet CSS & JS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="main-container">
+        <!-- Sidebar -->
+        <div id="sidebar">
+            <h1>🌍 GeoMap Indo</h1>
+            <p class="subtitle">Visualisasi Geologi Interaktif</p>
+            
+            <!-- Search -->
+            <div class="search-section">
+                <input type="text" id="searchInput" placeholder="🔍 Cari lokasi geologi...">
+            </div>
+
+            <!-- Filter Section -->
+            <div class="filter-section">
+                <h4>Filter Kategori</h4>
+                
+                <div id="dynamic-filters"></div>
+            </div>
+
+            <!-- Info Panel -->
+            <div id="info-panel">
+                <h3>Klik marker untuk info lengkap</h3>
+                <p>Gunakan search & filter untuk navigasi cepat.</p>
+            </div>
+        </div>
+
+        <!-- Map -->
+        <div id="map"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+
