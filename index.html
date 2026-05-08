@@ -13,7 +13,6 @@
             height: 100%;
             overflow: hidden;
             font-family: 'Segoe UI', Roboto, sans-serif;
-            /* Gradasi Litosfer ke Magma */
             background: radial-gradient(circle at center, #4d2600 0%, #1a0d00 70%, #000 100%);
         }
 
@@ -28,7 +27,6 @@
             padding: 20px;
         }
 
-        /* Judul dengan Efek Gempa (Earthquake) */
         h1 {
             font-size: 5rem;
             margin: 0;
@@ -38,10 +36,9 @@
             animation: earthquake 0.3s ease-in-out infinite alternate;
         }
 
-        /* Class untuk menghentikan gempa setelah 2 detik */
         .stable {
             animation: none !important;
-            color: #f1c40f !important; /* Warna emas/sulfur */
+            color: #f1c40f !important;
             text-shadow: 0px 0px 30px rgba(241, 196, 15, 0.8) !important;
             transition: all 1s ease;
         }
@@ -54,7 +51,7 @@
             line-height: 1.6;
             opacity: 0;
             transform: translateY(20px);
-            animation: fadeIn 1s ease forwards 2.5s; /* Muncul setelah gempa berhenti */
+            animation: fadeIn 1s ease forwards 2.5s;
         }
 
         .btn-explore {
@@ -79,7 +76,6 @@
             transform: scale(1.1);
         }
 
-        /* ANIMASI */
         @keyframes earthquake {
             0% { transform: translate(3px, 1px) rotate(0deg); }
             20% { transform: translate(-2px, -3px) rotate(-1deg); }
@@ -93,7 +89,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Hiasan "Partikel Debu/Batu" */
         .particles {
             position: absolute;
             width: 100%;
@@ -106,30 +101,21 @@
     </style>
 </head>
 <body>
-
     <div class="particles"></div>
-
     <div class="intro-container">
         <h1 id="main-title">GEOMAP</h1>
-        <p class="narasi">
-            Indonesia berdiri di atas pertemuan lempeng besar dunia. 
-            Setiap batuan punya cerita, setiap gunung punya sejarah. 
-            Apakah kamu siap menjelajahi rahasia di bawah kaki kita?
-        </p>
+        <p class="narasi">Indonesia berdiri di atas pertemuan lempeng besar dunia. Setiap batuan punya cerita, setiap gunung punya sejarah. Apakah kamu siap menjelajahi rahasia di bawah kaki kita?</p>
         <a href="home.html" class="btn-explore">MULAI EKSPLORASI</a>
     </div>
 
     <script>
-        // Logika untuk menghentikan gempa
         const title = document.getElementById('main-title');
-        
         setTimeout(() => {
             title.classList.add('stable');
-            // Sedikit getaran HP (Vibrate) kalau dibuka di smartphone
             if (navigator.vibrate) {
                 navigator.vibrate([100, 50, 100]);
             }
-        }, 2200); // Gempa berhenti setelah 2.2 detik
+        }, 2200);
     </script>
 </body>
 </html>

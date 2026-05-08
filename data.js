@@ -1,265 +1,362 @@
-// data.js - Versi Final Anti-Error (17 Sites)
+// data.js - GeoMap Indonesia V2.0
+// Geological Timeline Compatible Edition
+
 const lokasiGeologi = [
-    // VULKANIK (6)
+
+    // ======================================================
+    // VULKANIK
+    // ======================================================
+
     {
         nama: "Gunung Ciremai",
         koordinat: [-6.892, 108.406],
         kategori: "Vulkanik",
+        era: "Kuarter",
         wilayah: "jawa",
         emoji: "🌋",
+
         info: {
             batuan: "Andesit, Dasit, Piroklastik",
-            umur: "Holosen (<11.700 thn)",
-            skalaWaktu: "Kenozoikum - Kuarter",
+            umur: "Holosen (<11.700 tahun)",
+            skalaWaktu: "Kuarter",
             bencana: "Lahar, Piroklastik, Gas",
             lempeng: "Subduksi Indo-Australia"
         },
-        deskripsi: "Stratovulkan ganda teraktif di Jawa Barat. Magma andesitik dari subduksi lempeng."
+
+        deskripsi:
+            "Stratovulkan aktif tertinggi di Jawa Barat dengan magma andesitik hasil subduksi lempeng Indo-Australia."
     },
+
     {
         nama: "Gunung Merapi",
         koordinat: [-7.537, 110.446],
         kategori: "Vulkanik",
+        era: "Kuarter",
         wilayah: "jawa",
         emoji: "🌋",
+
         info: {
-            batuan: "Andesit, Basalt, Lava",
+            batuan: "Andesit, Basalt",
             umur: "Holosen",
-            skalaWaktu: "Kenozoikum",
-            bencana: "Lahar panas, Awan panas",
+            skalaWaktu: "Kuarter",
+            bencana: "Awan panas, Lahar",
             lempeng: "Subduksi Indo-Australia"
         },
-        deskripsi: "Gunung api paling aktif di Indonesia. Dome lava sering runtuh memicu lahar."
+
+        deskripsi:
+            "Salah satu gunung api paling aktif di dunia dengan aktivitas dome lava yang sangat intens."
     },
+
     {
         nama: "Gunung Krakatau",
         koordinat: [-6.102, 105.423],
         kategori: "Vulkanik",
-        wilayah: "sumatera",
-        emoji: "💥",
+        era: "Kuarter",
+        wilayah: "selat sunda",
+        emoji: "🌋",
+
         info: {
             batuan: "Andesit, Obsidian",
             umur: "Holosen",
-            skalaWaktu: "Kenozoikum",
-            bencana: "Letusan dahsyat 1883",
-            lempeng: "Subduksi Sunda Strait"
+            skalaWaktu: "Kuarter",
+            bencana: "Letusan eksplosif",
+            lempeng: "Subduksi Sunda"
         },
-        deskripsi: "Legendaris letusan 1883. Saat ini Anak Krakatau tumbuh aktif."
+
+        deskripsi:
+            "Kompleks vulkanik legendaris akibat letusan besar tahun 1883 yang memicu tsunami global."
     },
+
     {
         nama: "Gunung Bromo",
         koordinat: [-7.942, 112.953],
         kategori: "Vulkanik",
+        era: "Kuarter",
         wilayah: "jawa",
         emoji: "🌋",
+
         info: {
-            batuan: "Basalt, Trachyt",
+            batuan: "Basalt, Andesit",
             umur: "Kuarter",
-            skalaWaktu: "Kenozoikum",
-            bencana: "Emisi gas, letusan kecil",
-            lempeng: "Busur Vulkanik Jawa Timur"
+            skalaWaktu: "Kuarter",
+            bencana: "Abu vulkanik",
+            lempeng: "Busur Vulkanik Jawa"
         },
-        deskripsi: "Tengah Tengger Caldera. Ikon wisata geologi Indonesia."
+
+        deskripsi:
+            "Gunung api aktif di Kaldera Tengger dan menjadi ikon geowisata Indonesia."
     },
+
     {
         nama: "Gunung Rinjani",
         koordinat: [-8.415, 116.457],
         kategori: "Vulkanik",
-        wilayah: "nusa_tenggara",
-        emoji: "⛰️",
+        era: "Kuarter",
+        wilayah: "nusa tenggara",
+        emoji: "🌋",
+
         info: {
             batuan: "Andesit, Basalt",
             umur: "Kuarter",
-            skalaWaktu: "Kenozoikum",
-            bencana: "Lahar, longsor",
-            lempeng: "Subduksi Flores Back-arc"
+            skalaWaktu: "Kuarter",
+            bencana: "Lahar, Longsor",
+            lempeng: "Subduksi Flores"
         },
-        deskripsi: "Gunung tertinggi Lombok. Danau Segara Anak di caldera."
+
+        deskripsi:
+            "Gunung api besar di Lombok dengan kaldera Segara Anak yang terkenal."
     },
+
     {
         nama: "Gunung Agung",
         koordinat: [-8.342, 115.508],
         kategori: "Vulkanik",
+        era: "Kuarter",
         wilayah: "bali",
         emoji: "🌋",
+
         info: {
             batuan: "Andesit",
             umur: "Holosen",
-            skalaWaktu: "Kenozoikum",
-            bencana: "Letusan 1963, Abu vulkanik",
+            skalaWaktu: "Kuarter",
+            bencana: "Abu vulkanik",
             lempeng: "Subduksi Bali"
         },
-        deskripsi: "Gunung suci Bali. Letusan 1963 global impact."
+
+        deskripsi:
+            "Gunung suci Bali dengan aktivitas vulkanik yang masih sangat aktif."
     },
 
-    // TEKTONIK (6)
+    // ======================================================
+    // TEKTONIK
+    // ======================================================
+
     {
         nama: "Sesar Lembang",
         koordinat: [-6.825, 107.615],
         kategori: "Tektonik",
+        era: "Kuarter",
         wilayah: "jawa",
         emoji: "📉",
+
         info: {
-            batuan: "Breksi, Endapan Danau",
+            batuan: "Breksi, Sedimen Danau",
             umur: "Pleistosen",
-            skalaWaktu: "Kenozoikum",
-            bencana: "Gempa Terestrial M6+",
-            lempeng: "Sesar Intra-Lempeng Sunda"
+            skalaWaktu: "Kuarter",
+            bencana: "Gempa darat",
+            lempeng: "Sunda Block"
         },
-        deskripsi: "Patahan 29km utara Bandung. Potensi gempa tinggi."
+
+        deskripsi:
+            "Patahan aktif sepanjang utara Bandung dengan potensi gempa merusak."
     },
+
     {
         nama: "Sesar Palu-Koro",
         koordinat: [-0.907, 119.850],
         kategori: "Tektonik",
+        era: "Kuarter",
         wilayah: "sulawesi",
-        emoji: "💥",
+        emoji: "📉",
+
         info: {
-            batuan: "Batuan Metamorf",
+            batuan: "Metamorf",
             umur: "Kuarter",
-            skalaWaktu: "Kenozoikum",
-            bencana: "Gempa + Tsunami 2018",
-            lempeng: "Transform Fault Sulawesi"
+            skalaWaktu: "Kuarter",
+            bencana: "Gempa dan tsunami",
+            lempeng: "Transform Fault"
         },
-        deskripsi: "Sesar strike-slip kanan. Gempa M7.5 + likuifaksi 2018."
+
+        deskripsi:
+            "Sesar geser aktif penyebab gempa dan tsunami Palu 2018."
     },
+
     {
         nama: "Sesar Sumatera",
         koordinat: [-0.000, 99.500],
         kategori: "Tektonik",
+        era: "Neogen",
         wilayah: "sumatera",
         emoji: "📉",
+
         info: {
-            batuan: "Granite, Metamorf",
-            umur: "Miosen - Kuarter",
-            skalaWaktu: "Kenozoikum",
-            bencana: "Gempa M>8",
+            batuan: "Granit, Metamorf",
+            umur: "Miosen - Sekarang",
+            skalaWaktu: "Neogen",
+            bencana: "Gempa besar",
             lempeng: "Great Sumatran Fault"
         },
-        deskripsi: "Sesar strike-slip 1900km. Padang gempa 2009."
+
+        deskripsi:
+            "Sistem sesar besar sepanjang Pulau Sumatera akibat subduksi miring."
     },
+
     {
         nama: "Pegunungan Jayawijaya",
         koordinat: [-4.000, 137.000],
         kategori: "Tektonik",
+        era: "Neogen",
         wilayah: "papua",
-        emoji: "⛰️",
+        emoji: "📉",
+
         info: {
             batuan: "Metamorf, Ultramafik",
-            umur: "Mesozoikum",
-            skalaWaktu: "Era Fanerozoikum",
-            bencana: "Longsor pegunungan",
-            lempeng: "Tumbukan Pasifik - Australia"
+            umur: "Mesozoikum - Neogen",
+            skalaWaktu: "Neogen",
+            bencana: "Longsor",
+            lempeng: "Kolisi Australia-Pasifik"
         },
-        deskripsi: "Pegunungan tengah Papua. Tertua di Indonesia."
+
+        deskripsi:
+            "Pegunungan hasil tumbukan lempeng yang masih terus mengalami pengangkatan."
     },
+
     {
         nama: "Zona Subduksi Selatan Jawa",
         koordinat: [-9.000, 110.000],
         kategori: "Tektonik",
+        era: "Mesozoikum",
         wilayah: "jawa",
-        emoji: "🌊",
+        emoji: "📉",
+
         info: {
             batuan: "Ophiolit, Blueschist",
-            umur: "Tersier - Kuarter",
-            skalaWaktu: "Kenozoikum",
-            bencana: "Gempa Megathrust M9",
-            lempeng: "Subduksi Indo-Australia"
+            umur: "Mesozoikum",
+            skalaWaktu: "Mesozoikum",
+            bencana: "Megathrust",
+            lempeng: "Indo-Australia"
         },
-        deskripsi: "Trench terdalam. Sumber gempa besar + tsunami."
+
+        deskripsi:
+            "Zona subduksi aktif pembentuk busur vulkanik Jawa."
     },
+
     {
         nama: "Sesar Cimandiri",
         koordinat: [-6.9889, 106.5510],
         kategori: "Tektonik",
+        era: "Neogen",
         wilayah: "jawa",
         emoji: "📉",
+
         info: {
-            batuan: "Breksi, Formasi Jampang",
-            umur: "Miosen - Kuarter",
-            skalaWaktu: "Kenozoikum",
-            bencana: "Gempa Bumi Terestrial",
-            lempeng: "Sesar Aktif Intra-Busur"
+            batuan: "Breksi Vulkanik",
+            umur: "Miosen - Sekarang",
+            skalaWaktu: "Neogen",
+            bencana: "Gempa bumi",
+            lempeng: "Sesar Aktif Jawa Barat"
         },
-        deskripsi: "Sesar aktif yang memanjang dari Teluk Pelabuhan Ratu hingga ke arah timur laut."
+
+        deskripsi:
+            "Sesar aktif memanjang dari Pelabuhan Ratu hingga Cianjur."
     },
 
-    // SEDIMEN (3)
+    // ======================================================
+    // SEDIMEN
+    // ======================================================
+
     {
         nama: "Cekungan Jatibarang",
         koordinat: [-6.474, 108.312],
         kategori: "Sedimen",
+        era: "Neogen",
         wilayah: "jawa",
-        emoji: "🏔️",
+        emoji: "🛢️",
+
         info: {
-            batuan: "Batupasir, Batulempung, Tuff",
+            batuan: "Batupasir, Batulempung",
             umur: "Miosen",
-            skalaWaktu: "Kenozoikum",
-            bencana: "Tanah longsor",
-            lempeng: "Fore-arc Basin"
+            skalaWaktu: "Neogen",
+            bencana: "Longsor",
+            lempeng: "Fore Arc Basin"
         },
-        deskripsi: "Reservoir migas utama. Endapan turbidit."
+
+        deskripsi:
+            "Cekungan sedimen penting penghasil hidrokarbon di Jawa Barat."
     },
+
     {
         nama: "Cekungan Kutai",
         koordinat: [0.000, 117.000],
         kategori: "Sedimen",
+        era: "Paleogen",
         wilayah: "kalimantan",
         emoji: "🛢️",
+
         info: {
             batuan: "Batupasir, Shale",
             umur: "Eosen - Pliosen",
-            skalaWaktu: "Kenozoikum",
+            skalaWaktu: "Paleogen",
             bencana: "Penurunan tanah",
-            lempeng: "Rift Basin Kalimantan"
+            lempeng: "Kalimantan Basin"
         },
-        deskripsi: "Cekungan migas terbesar Indonesia."
+
+        deskripsi:
+            "Cekungan sedimen terbesar di Indonesia dengan cadangan migas besar."
     },
+
     {
         nama: "Formasi Tonasa",
         koordinat: [-4.000, 119.500],
         kategori: "Sedimen",
+        era: "Paleogen",
         wilayah: "sulawesi",
-        emoji: "🏝️",
+        emoji: "🛢️",
+
         info: {
-            batuan: "Batugamping, Reefal",
-            umur: "Miosen",
-            skalaWaktu: "Kenozoikum",
+            batuan: "Batugamping",
+            umur: "Eosen",
+            skalaWaktu: "Paleogen",
             bencana: "Karst collapse",
             lempeng: "Carbonate Platform"
         },
-        deskripsi: "Batu gamping kaya fosil Sulawesi Selatan."
+
+        deskripsi:
+            "Formasi karbonat kaya fosil laut di Sulawesi Selatan."
     },
 
-    // METAMORF (2)
+    // ======================================================
+    // METAMORF
+    // ======================================================
+
     {
         nama: "Kompleks Metamorf Toraja",
         koordinat: [-2.9, 119.9],
         kategori: "Metamorf",
+        era: "Paleogen",
         wilayah: "sulawesi",
-        emoji: "🔮",
+        emoji: "💎",
+
         info: {
-            batuan: "Mika Skis, Gneis, Amphibolit",
+            batuan: "Skis, Gneis",
             umur: "Eosen - Miosen",
-            skalaWaktu: "Kenozoikum",
-            bencana: "Longsor batuan rapuh",
+            skalaWaktu: "Paleogen",
+            bencana: "Longsor",
             lempeng: "Orogeni Sulawesi"
         },
-        deskripsi: "Zona metamorf high-grade Sulawesi Selatan dari tumbukan lempeng."
+
+        deskripsi:
+            "Zona metamorf tingkat tinggi akibat tumbukan mikro-kontinen Sulawesi."
     },
+
     {
         nama: "Batuan Metamorf Papua Tengah",
         koordinat: [-3.5, 135.5],
         kategori: "Metamorf",
+        era: "Mesozoikum",
         wilayah: "papua",
-        emoji: "💎", // Diganti dari batu ke kristal biar kebaca
+        emoji: "💎",
+
         info: {
             batuan: "Skis, Fillit, Marmer",
-            umur: "Mesozoikum - Tersier",
-            skalaWaktu: "Fanerozoikum",
+            umur: "Mesozoikum",
+            skalaWaktu: "Mesozoikum",
             bencana: "Gempa tektonik",
-            lempeng: "Tumbukan kontinen"
+            lempeng: "Kolisi Kontinen"
         },
-        deskripsi: "Metamorf dari kolisi lempeng di Pegunungan Lengguru."
+
+        deskripsi:
+            "Batuan metamorf hasil tekanan dan temperatur tinggi akibat kolisi lempeng."
     }
+
 ];
